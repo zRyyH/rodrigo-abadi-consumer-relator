@@ -9,7 +9,6 @@ RABBITMQ_PORT = int(os.getenv("RABBITMQ_PORT", 5672))
 RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "localhost")
 RABBITMQ_QUEUE = os.getenv("RABBITMQ_QUEUE", "my_queue")
 RABBITMQ_PASSWORD = os.getenv("RABBITMQ_PASSWORD", "guest")
-RABBITMQ_NEXT_QUEUE = os.getenv("RABBITMQ_NEXT_QUEUE", "next_processing_queue")
 
 # Directus API
 DIRECTUS_API_URL = os.getenv("DIRECTUS_API_URL", "localhost")
