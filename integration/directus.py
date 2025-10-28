@@ -20,14 +20,11 @@ class Directus:
                 params=params,
                 timeout=300,
             )
-
             response.raise_for_status()
-
             return response.json()
 
         except requests.exceptions.RequestException as e:
-            logger.error(f" Directus API Error: {response.json()}")
-            logger.error(f"❌ Erro no GET na collection '{collection}': {str(e)}")
+            logger.error(f"❌ Erro GET '{collection}': {str(e)}")
             raise
 
     def patch(self, collection: str, data: dict):
@@ -39,13 +36,9 @@ class Directus:
                 json=data,
                 timeout=300,
             )
-
             response.raise_for_status()
-
             return response.json()
 
         except requests.exceptions.RequestException as e:
-            logger.error(f"Directus API Error: {response.json()}")
-            logger.error(f"Data: {data}")
-            logger.error(f"❌ Erro no PATCH na collection '{collection}': {str(e)}")
+            logger.error(f"❌ Erro PATCH '{collection}': {str(e)}")
             raise

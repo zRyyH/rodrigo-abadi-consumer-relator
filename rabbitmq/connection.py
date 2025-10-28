@@ -1,4 +1,4 @@
-from logging_config import logger, log_start
+from logging_config import logger
 from config.settings import (
     RABBITMQ_HOST,
     RABBITMQ_PORT,
@@ -12,8 +12,6 @@ import pika
 def get_connection(retry_delay=5):
     """
     Retorna uma conexão RabbitMQ com reconexão automática em caso de falha.
-
-    :param retry_delay: tempo em segundos entre tentativas de reconexão
     """
     credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
     parameters = pika.ConnectionParameters(
@@ -28,13 +26,14 @@ def get_connection(retry_delay=5):
         try:
             connection = pika.BlockingConnection(parameters)
             if connection.is_open:
-                log_start("✅ Conectado ao RabbitMQ")
+                logger.info(
+                    f"✅ Conectado ao RabbitMQ ({RABBITMQ_HOST}:{RABBITMQ_PORT})"
+                )
                 return connection
         except pika.exceptions.AMQPConnectionError as e:
-            logger.error(f"❌ Erro ao conectar ao RabbitMQ: {e}")
-            logger.info(f"⏳ Tentando reconectar em {retry_delay}s...")
+            logger.error(f"❌ Falha na conexão RabbitMQ: {e}")
+            logger.info(f"⏳ Reconectando em {retry_delay}s...")
             time.sleep(retry_delay)
         except Exception as e:
             logger.error(f"❌ Erro inesperado: {e}")
-            logger.info(f"⏳ Tentando reconectar em {retry_delay}s...")
             time.sleep(retry_delay)
