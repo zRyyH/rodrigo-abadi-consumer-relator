@@ -11,6 +11,6 @@ RABBITMQ_QUEUE = os.getenv("RABBITMQ_QUEUE", "my_queue")
 RABBITMQ_PASSWORD = os.getenv("RABBITMQ_PASSWORD", "guest")
 
 # Directus API
+BATCH_SIZE = int(os.getenv("BATCH_SIZE", 50))
 DIRECTUS_API_URL = os.getenv("DIRECTUS_API_URL", "localhost")
 DIRECTUS_STATIC_TOKEN = os.getenv("DIRECTUS_STATIC_TOKEN", "")
-GET_BATCH_SIZE = int(os.getenv("GET_BATCH_SIZE", 50))

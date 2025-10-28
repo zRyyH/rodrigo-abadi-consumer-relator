@@ -27,27 +27,7 @@ class Directus:
 
         except requests.exceptions.RequestException as e:
             logger.error(f" Directus API Error: {response.json()}")
-            logger.error(f"  ❌ Erro ao criar item na collection '{collection}': {str(e)}")
-            raise
-
-    def post(self, collection: str, data: dict):
-        """Cria um novo item na collection do Directus."""
-        try:
-            response = requests.post(
-                f"{self.url}/{collection}",
-                headers=self.headers,
-                json=data,
-                timeout=300,
-            )
-            
-            response.raise_for_status()
-
-            return response.json()
-
-        except requests.exceptions.RequestException as e:
-            logger.error(f" Directus API Error: {response.json()}")
-            logger.error(f" Data: {data}")
-            logger.error(f"  ❌ Erro ao criar item na collection '{collection}' data: {data}: {str(e)}")
+            logger.error(f"❌ Erro no GET na collection '{collection}': {str(e)}")
             raise
 
     def patch(self, collection: str, data: dict):
@@ -65,7 +45,7 @@ class Directus:
             return response.json()
 
         except requests.exceptions.RequestException as e:
-            logger.error(f" Directus API Error: {response.json()}")
-            logger.error(f" Data: {data}")
-            logger.error(f"  ❌ Erro ao criar item na collection '{collection}': {str(e)}")
+            logger.error(f"Directus API Error: {response.json()}")
+            logger.error(f"Data: {data}")
+            logger.error(f"❌ Erro no PATCH na collection '{collection}': {str(e)}")
             raise
