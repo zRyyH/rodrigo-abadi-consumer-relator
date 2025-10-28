@@ -1,9 +1,12 @@
 import pika
 import logging
 
-# Configuração básica de logging
+# Configuração de logging - silencia Pika
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+# Silencia logs do Pika
+logging.getLogger('pika').setLevel(logging.WARNING)
 
 try:
     credentials = pika.PlainCredentials("admin", "73p8Wg8ibGZJ")
